@@ -1,0 +1,362 @@
+\documentclass[9pt,a4paper]{article}
+\usepackage[margin=1cm,landscape]{geometry}
+\geometry{
+  a4paper,
+  left=10mm,
+  right=10mm,
+  headheight=1cm,
+  top=1cm,
+  bottom=1.5cm,
+  footskip=1cm,
+  %showframe
+}
+
+%\usepackage{lipsum}
+\usepackage{multicol} % For overall column layout
+\usepackage{xcolor} % For colors
+\usepackage{tabularx}
+\usepackage{fancyhdr} % For footer
+
+\pagenumbering{gobble} % No page numbering
+\pagestyle{fancy}
+\fancyhead{} % No header
+\renewcommand{\headrulewidth}{0pt} % No header rule
+
+\cfoot{\copyright~2019 Canonical} % Actual footer text
+
+% A bunch of command for boilerplate text
+\newcommand{\rosverb}[1]{\textbf{\sffamily\color{blue}#1}~~}
+\newcommand{\rossubverb}[1]{{\sffamily\color{blue}#1}~~}
+\newcommand{\textangles}[1]{\textless #1\textgreater}
+\newcommand{\smallhspace}{\-\hspace{0.3cm}}
+\newcommand{\terminal}[1]{\-\hspace{0.5cm}{\sffamily\$ #1}}
+
+\begin{document}
+\setlength\parindent{0pt}
+\begin{multicols*}{3}[]
+
+\begin{center}
+  \textbf{\Large ROS 2 Cheats Sheet}
+\end{center}
+
+\hrulefill
+
+%
+All ROS 2 CLI tools start with the prefix `ros2' followed by a verb
+and (possibly) a sub-verb.
+For any tool, the documentation is accessible with,\\
+\terminal{ros2 \rosverb{verb} - -help}\\
+and similarly for sub-verb documentation,\\
+\terminal{ros2 \rosverb{verb} \rossubverb{sub\_verb} -h}
+
+\hrulefill
+
+\rosverb{action} Also allows to manually send a goal and
+displays debugging information about action.
+\\
+Sub-commands:
+\\
+% @todo: limit description size
+\begin{tabular*}{.9\linewidth}{ll}
+\smallhspace \rossubverb{info}        & Output information about an action. \\
+\smallhspace \rossubverb{list}        & Output a list of action names.      \\
+\smallhspace \rossubverb{send\_goal}  & Send an action goal.                \\
+\smallhspace \rossubverb{show}        &  Output the action definition.
+\end{tabular*}
+
+\hrulefill
+
+\rosverb{bag} Allows to record/play topics to/from a rosbag.\\
+Sub-commands:
+\\
+%
+\begin{tabular}{ll}
+\smallhspace \rossubverb{info}      & Output information of a bag.\\
+\smallhspace \rossubverb{play}      & Play a bag.\\
+\smallhspace \rossubverb{record}    & Record a bag.
+\end{tabular}
+%
+\\
+Examples:
+\\
+\terminal{ros2 info bag\_name}\\
+\terminal{ros2 play bag\_name}\\
+\terminal{ros2 record -a}
+
+\hrulefill
+
+%
+\rosverb{component} Various component related sub-commands.\\
+Sub-commands:
+\\
+%
+\begin{tabularx}{\linewidth}{lX}
+\smallhspace \rossubverb{list}          & Output a list of running containers and components.           \\
+\smallhspace \rossubverb{load}          & Load a component into a container node.                       \\
+\smallhspace \rossubverb{standalone}    & Run a component into its own standalone container node.       \\
+\smallhspace \rossubverb{types}         & Output a list of components registered in the ament index.    \\
+\smallhspace \rossubverb{unload}        & Unload a component from a container node.
+\end{tabularx}
+%
+%\\
+%Examples:
+%\\
+%\terminal{ros2 VERB SUBVERB}
+
+\hrulefill
+
+%
+\rosverb{daemon} Various daemon related sub-commands.\\
+Sub-commands:
+\\
+% @todo: limit description size
+\begin{tabular*}{.9\linewidth}{ll}
+\smallhspace \rossubverb{start}  &  Start the daemon if it isn't running.   \\
+\smallhspace \rossubverb{status} &  Output the status of the daemon.        \\
+\smallhspace \rossubverb{stop}   &  Stop the daemon if it is running
+\end{tabular*}
+%
+
+\hrulefill
+
+%
+\rosverb{extension\_points} \\
+
+\hrulefill
+
+\rosverb{extensions} \\
+
+\hrulefill
+
+\rosverb{launch} Allows to run a launch file in an arbitrary package
+without to cd there first.\\
+Usage:
+\\
+\terminal{ros2 launch \textangles{package}~\textangles{launch-file}}
+\\
+Example:
+\\
+\terminal{ros2 launch demo\_nodes\_cpp add\_two\_ints.launch.py}
+%
+
+\hrulefill
+
+%
+\rosverb{lifecycle} Various lifecycle related sub-commands.\\
+get
+  list
+  nodes
+  set
+Sub-commands:
+\\
+%
+\begin{tabular}{ll}
+\smallhspace \rossubverb{get}   & Get lifecycle state for one or more nodes.    \\
+\smallhspace \rossubverb{list}  & Output a list of available transitions.       \\
+\smallhspace \rossubverb{nodes} & Output a list of nodes with lifecycle.        \\
+\smallhspace \rossubverb{set}   & Trigger lifecycle state transition.
+\end{tabular}
+%
+
+\hrulefill
+
+%
+\rosverb{msg} Displays debugging information about messages.
+\\
+Sub-commands:
+\\
+\begin{tabularx}{\linewidth}{lX}
+\smallhspace \rossubverb{list}      & Output a list of message types.                           \\
+\smallhspace \rossubverb{package}   & Output a list of message types within a given package.    \\
+\smallhspace \rossubverb{packages}  & Output a list of packages which contain messages.         \\
+\smallhspace \rossubverb{show}      & Output the message definition.
+\end{tabularx}
+%
+Examples:
+\\
+\terminal{ros2 msg list} \\
+\terminal{ros2 msg package std\_msgs} \\
+\terminal{ros2 msg packages} \\
+\terminal{ros2 msg show geometry\_msgs/msg/Pose}
+%
+
+\hrulefill
+
+%
+\rosverb{multicast} Various multicast related sub-commands.
+\\
+Sub-commands:
+\\
+\begin{tabularx}{\linewidth}{lX}
+\smallhspace \rossubverb{receive}   &  Receive a single UDP multicast packet. \\
+\smallhspace \rossubverb{send}      &  Send a single UDP multicast packet.
+\end{tabularx}
+%
+
+\hrulefill
+
+%
+\rosverb{node} Displays debugging information about nodes. \\
+Sub-commands:
+\\
+%
+\begin{tabularx}{\linewidth}{lX}
+\smallhspace \rossubverb{info}   & Output information about a node. \\
+\smallhspace \rossubverb{list}   & Output a list of available nodes.
+\end{tabularx}
+%
+Examples:
+\\
+\terminal{ros2 node info /talker} \\
+\terminal{ros2 node list}
+%
+
+\hrulefill
+
+%
+\rosverb{param} Allows to manipulate parameters.\\
+Sub-commands:
+\\
+%
+\begin{tabularx}{\linewidth}{lX}
+\smallhspace \rossubverb{delete}    & Delete parameter.                         \\
+\smallhspace \rossubverb{get}       & Get parameter.                            \\
+\smallhspace \rossubverb{list}      & Output a list of available parameters.    \\
+\smallhspace \rossubverb{set}       & Set parameter
+\end{tabularx}
+%
+Examples:
+\\
+\terminal{ros2 param delete \textbackslash talker \textbackslash use\_sim\_time}    \\
+\terminal{ros2 param get \textbackslash talker \textbackslash use\_sim\_time}       \\
+\terminal{ros2 param list}                                                          \\
+\terminal{ros2 param set \textbackslash talker \textbackslash use\_sim\_time false}
+%
+
+\hrulefill
+
+%
+\rosverb{pkg} \\
+Sub-commands:
+\\
+\begin{tabularx}{\linewidth}{lX}
+\smallhspace \rossubverb{create}        &  Create a new ROS2 package.                       \\
+\smallhspace \rossubverb{executables}   &  Output a list of package specific executables.   \\
+\smallhspace \rossubverb{list}          &  Output a list of available packages.             \\
+\smallhspace \rossubverb{prefix}        &  Output the prefix path of a package.
+\end{tabularx}
+%
+Examples:
+\\
+\terminal{ros2 pkg executables demo\_nodes\_cpp}    \\
+\terminal{ros2 pkg list}                            \\
+\terminal{ros2 pkg prefix std\_msgs}
+
+\hrulefill
+
+%
+\rosverb{run} Allows to run an executable in an arbitrary package
+without having to cd there first.
+\\
+Usage:
+\\
+\terminal{ros2 run \textangles{package}~\textangles{executable}}
+\\
+Example:
+\\
+\terminal{ros2 run demo\_node\_cpp talker}
+%
+
+\hrulefill
+
+%
+\rosverb{security} Various security related sub-commands.\\
+Sub-commands:
+\\
+%
+\begin{tabularx}{\linewidth}{lX}
+\smallhspace \rossubverb{create\_key}            & Create key.                                  \\
+\smallhspace \rossubverb{create\_permission}     & Create keystore.                             \\
+\smallhspace \rossubverb{generate\_artifacts}    & Create permission.                           \\
+\smallhspace \rossubverb{list\_keys}             & Distribute key.                              \\
+\smallhspace \rossubverb{create\_keystore}       & Generate keys and permission
+files from a list of identities and policy files.                                               \\
+\smallhspace \rossubverb{distribute\_key}        & Generate XML policy file from ROS graph data.\\
+\smallhspace \rossubverb{generate\_policy}       & List keys.
+\end{tabularx}
+%
+
+\hrulefill
+
+%
+\rosverb{service} Allows to manually call a service and displays debugging
+information about services.\\
+Sub-commands:
+\\
+\begin{tabular*}{.9\linewidth}{ll}
+\smallhspace \rossubverb{call}   & Call a service.                            \\
+\smallhspace \rossubverb{find}   & Output a list of services of a given type. \\
+\smallhspace \rossubverb{list}   & Output a list of service names.            \\
+\smallhspace \rossubverb{type}   & Output service's type.
+\end{tabular*}
+%
+\\
+Examples:
+\\
+\terminal{ros2 service call \textbackslash\hfill\phantom{.}\linebreak
+/add\_two\_ints example\_interfaces/AddTwoInts "{a: 1, b: 2}"}        \\
+\terminal{ros2 service find rcl\_interfaces/srv/ListParameters}       \\
+\terminal{ros2 service list}                                          \\
+\terminal{ros2 service type /talker/describe\_parameters}
+
+\hrulefill
+
+%
+\rosverb{srv} \\
+Sub-commands:
+\\
+%
+\begin{tabular}{ll}
+\smallhspace \rossubverb{list}      & \\
+\smallhspace \rossubverb{package}   & \\
+\smallhspace \rossubverb{packages}  & \\
+\smallhspace \rossubverb{show}      &
+\end{tabular}
+%
+
+\hrulefill
+
+%
+\rosverb{test} \\
+%
+
+\hrulefill
+
+%
+\rosverb{topic} A tool for displaying debug information about ROS topics,
+including publishers, subscribers, publishing rate, and
+messages.
+\\
+Sub-commands:
+\\
+%
+\begin{tabular}{ll}
+\smallhspace \rossubverb{bw}    & Display bandwidth used by topic.                  \\
+\smallhspace \rossubverb{delay} & Display delay of topic from timestamp in header.  \\
+\smallhspace \rossubverb{echo}  & Output messages of a given topic to screen.       \\
+\smallhspace \rossubverb{find}  & Find topics of a given type type.                 \\
+\smallhspace \rossubverb{hz}    & Display publishing rate of topic.                 \\
+\smallhspace \rossubverb{info}  & Output information about a given topic.           \\
+\smallhspace \rossubverb{list}  & Output list of active topics.                     \\
+\smallhspace \rossubverb{pub}   & Publish data to a topic.                          \\
+\smallhspace \rossubverb{type}  & Output topic's type.
+\end{tabular}
+%
+Examples:
+\\
+\terminal{ros2 topic bw}    \\
+\terminal{ros2 topic echo}                            \\
+\terminal{ros2 topic hz}
+
+\end{multicols*}
+\end{document}
