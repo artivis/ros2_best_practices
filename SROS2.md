@@ -5,7 +5,9 @@ Assuming ROS 2 is already installed. If not report first to [Installation](insta
 
 # Tutorials
 
-[This tutorial](https://ruffsl.github.io/IROS2018_SROS2_Tutorial/)
+[Security and Usability: Designing Security Tooling That Roboticists Can Use](https://www.slideshare.net/RuffinWhite/security-and-usability-designing-security-tooling-that-roboticists-can-use).
+
+[This other tutorial](https://ruffsl.github.io/IROS2018_SROS2_Tutorial/)
 was a half-day training given at IROS 2018.
 It covers the following topics:
 
