@@ -12,5 +12,5 @@ one will come across while getting started with ROS 2.
 <!--    1.   [[ Installation and Hello world | SROS2.md#installation-and-hello-world ]] -->
 <!--    2.   [[ Tutorials | SROS2.md#tutorials ]] -->
 4.  [Snap](snap.md)
-5.  [cheats_sheet.pdf](cheats_sheet/cheats_sheet.pdf).
+5.  [cheats Sheet](cheats_sheet/cheats_sheet.pdf)
 6.  [Awesome ROS 2](https://fkromer.github.io/awesome-ros2/) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
