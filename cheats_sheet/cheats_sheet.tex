@@ -196,7 +196,8 @@ Sub-commands:
 \hrulefill
 
 %
-\rosverb{node} Displays debugging information about nodes. \\
+\rosverb{node} Displays debugging information about nodes.
+\\
 Sub-commands:
 \\
 %
@@ -214,7 +215,8 @@ Examples:
 \hrulefill
 
 %
-\rosverb{param} Allows to manipulate parameters.\\
+\rosverb{param} Allows to manipulate parameters.
+\\
 Sub-commands:
 \\
 %
@@ -231,26 +233,27 @@ Examples:
 \terminal{ros2 param get \textbackslash talker \textbackslash use\_sim\_time}       \\
 \terminal{ros2 param list}                                                          \\
 \terminal{ros2 param set \textbackslash talker \textbackslash use\_sim\_time false}
-%
 
 \hrulefill
 
 %
-\rosverb{pkg} \\
+\rosverb{pkg} Create a ros2 package or output package(s)-related information.\\
 Sub-commands:
 \\
 \begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{create}        &  Create a new ROS2 package.                       \\
 \smallhspace \rossubverb{executables}   &  Output a list of package specific executables.   \\
 \smallhspace \rossubverb{list}          &  Output a list of available packages.             \\
-\smallhspace \rossubverb{prefix}        &  Output the prefix path of a package.
+\smallhspace \rossubverb{prefix}        &  Output the prefix path of a package.             \\
+\smallhspace \rossubverb{xml}           &  Output the information contained in the package xml manifest.
 \end{tabularx}
 %
 Examples:
 \\
 \terminal{ros2 pkg executables demo\_nodes\_cpp}    \\
 \terminal{ros2 pkg list}                            \\
-\terminal{ros2 pkg prefix std\_msgs}
+\terminal{ros2 pkg prefix std\_msgs}                \\
+\terminal{ros2 pkg xml -t version}
 
 \hrulefill
 
