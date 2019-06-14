@@ -38,6 +38,7 @@
 \begin{center}
   \textbf{\Large ROS 2 Cheats Sheet}
 \end{center}
+%
 
 \hrulefill
 
@@ -48,33 +49,38 @@ For any tool, the documentation is accessible with,\\
 \terminal{ros2 \rosverb{verb} - -help}\\
 and similarly for sub-verb documentation,\\
 \terminal{ros2 \rosverb{verb} \rossubverb{sub\_verb} -h}
+%
 
 \hrulefill
 
+%
 \rosverb{action} Also allows to manually send a goal and
 displays debugging information about action.
 \\
 Sub-commands:
 \\
 % @todo: limit description size
-\begin{tabular*}{.9\linewidth}{ll}
+\begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{info}        & Output information about an action. \\
 \smallhspace \rossubverb{list}        & Output a list of action names.      \\
 \smallhspace \rossubverb{send\_goal}  & Send an action goal.                \\
 \smallhspace \rossubverb{show}        &  Output the action definition.
-\end{tabular*}
+\end{tabularx}
+%
 
 \hrulefill
 
-\rosverb{bag} Allows to record/play topics to/from a rosbag.\\
+%
+\rosverb{bag} Allows to record/play topics to/from a rosbag.
+\\
 Sub-commands:
 \\
 %
-\begin{tabular}{ll}
+\begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{info}      & Output information of a bag.\\
 \smallhspace \rossubverb{play}      & Play a bag.\\
 \smallhspace \rossubverb{record}    & Record a bag.
-\end{tabular}
+\end{tabularx}
 %
 \\
 Examples:
@@ -82,6 +88,7 @@ Examples:
 \terminal{ros2 info bag\_name}\\
 \terminal{ros2 play bag\_name}\\
 \terminal{ros2 record -a}
+%
 
 \hrulefill
 
@@ -98,10 +105,6 @@ Sub-commands:
 \smallhspace \rossubverb{unload}        & Unload a component from a container node.
 \end{tabularx}
 %
-%\\
-%Examples:
-%\\
-%\terminal{ros2 VERB SUBVERB}
 
 \hrulefill
 
@@ -109,27 +112,31 @@ Sub-commands:
 \rosverb{daemon} Various daemon related sub-commands.\\
 Sub-commands:
 \\
-% @todo: limit description size
-\begin{tabular*}{.9\linewidth}{ll}
+\begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{start}  &  Start the daemon if it isn't running.   \\
 \smallhspace \rossubverb{status} &  Output the status of the daemon.        \\
 \smallhspace \rossubverb{stop}   &  Stop the daemon if it is running
-\end{tabular*}
+\end{tabularx}
 %
 
 \hrulefill
 
 %
 \rosverb{extension\_points} List extension points.
+%
 
 \hrulefill
 
+%
 \rosverb{extensions} List extensions.
+%
 
 \hrulefill
 
+%
 \rosverb{launch} Allows to run a launch file in an arbitrary package
-without to cd there first.\\
+without to cd there first.
+\\
 Usage:
 \\
 \terminal{ros2 launch \textangles{package}~\textangles{launch-file}}
@@ -142,20 +149,17 @@ Example:
 \hrulefill
 
 %
-\rosverb{lifecycle} Various lifecycle related sub-commands.\\
-get
-  list
-  nodes
-  set
+\rosverb{lifecycle} Various lifecycle related sub-commands.
+\\
 Sub-commands:
 \\
 %
-\begin{tabular}{ll}
+\begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{get}   & Get lifecycle state for one or more nodes.    \\
 \smallhspace \rossubverb{list}  & Output a list of available transitions.       \\
 \smallhspace \rossubverb{nodes} & Output a list of nodes with lifecycle.        \\
 \smallhspace \rossubverb{set}   & Trigger lifecycle state transition.
-\end{tabular}
+\end{tabularx}
 %
 
 \hrulefill
@@ -200,7 +204,6 @@ Sub-commands:
 \\
 Sub-commands:
 \\
-%
 \begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{info}   & Output information about a node. \\
 \smallhspace \rossubverb{list}   & Output a list of available nodes.
@@ -219,7 +222,6 @@ Examples:
 \\
 Sub-commands:
 \\
-%
 \begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{delete}    & Delete parameter.                         \\
 \smallhspace \rossubverb{get}       & Get parameter.                            \\
@@ -229,15 +231,17 @@ Sub-commands:
 %
 Examples:
 \\
-\terminal{ros2 param delete \textbackslash talker \textbackslash use\_sim\_time}    \\
-\terminal{ros2 param get \textbackslash talker \textbackslash use\_sim\_time}       \\
-\terminal{ros2 param list}                                                          \\
-\terminal{ros2 param set \textbackslash talker \textbackslash use\_sim\_time false}
+\terminal{ros2 param delete /talker /use\_sim\_time}    \\
+\terminal{ros2 param get /talker /use\_sim\_time}       \\
+\terminal{ros2 param list}                              \\
+\terminal{ros2 param set /talker /use\_sim\_time false}
+%
 
 \hrulefill
 
 %
-\rosverb{pkg} Create a ros2 package or output package(s)-related information.\\
+\rosverb{pkg} Create a ros2 package or output package(s)-related information.
+\\
 Sub-commands:
 \\
 \begin{tabularx}{\linewidth}{lX}
@@ -254,6 +258,7 @@ Examples:
 \terminal{ros2 pkg list}                            \\
 \terminal{ros2 pkg prefix std\_msgs}                \\
 \terminal{ros2 pkg xml -t version}
+%
 
 \hrulefill
 
@@ -273,7 +278,8 @@ Example:
 \hrulefill
 
 %
-\rosverb{security} Various security related sub-commands.\\
+\rosverb{security} Various security related sub-commands.
+\\
 Sub-commands:
 \\
 %
@@ -293,17 +299,17 @@ files from a list of identities and policy files.                               
 
 %
 \rosverb{service} Allows to manually call a service and displays debugging
-information about services.\\
+information about services.
+\\
 Sub-commands:
 \\
-\begin{tabular*}{.9\linewidth}{ll}
+\begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{call}   & Call a service.                            \\
 \smallhspace \rossubverb{find}   & Output a list of services of a given type. \\
 \smallhspace \rossubverb{list}   & Output a list of service names.            \\
 \smallhspace \rossubverb{type}   & Output service's type.
-\end{tabular*}
+\end{tabularx}
 %
-\\
 Examples:
 \\
 \terminal{ros2 service call \textbackslash\hfill\phantom{.}\linebreak
@@ -311,26 +317,28 @@ Examples:
 \terminal{ros2 service find rcl\_interfaces/srv/ListParameters}       \\
 \terminal{ros2 service list}                                          \\
 \terminal{ros2 service type /talker/describe\_parameters}
+%
 
 \hrulefill
 
 %
-\rosverb{srv} \\
+\rosverb{srv} Various srv related sub-commands.
+\\
 Sub-commands:
 \\
 %
-\begin{tabular}{ll}
-\smallhspace \rossubverb{list}      & \\
-\smallhspace \rossubverb{package}   & \\
-\smallhspace \rossubverb{packages}  & \\
-\smallhspace \rossubverb{show}      &
-\end{tabular}
+\begin{tabularx}{\linewidth}{lX}
+\smallhspace \rossubverb{list}      & Output a list of available service types.\\
+\smallhspace \rossubverb{package}   & Output a list of available service types within one package.\\
+\smallhspace \rossubverb{packages}  & Output a list of packages which contain services.\\
+\smallhspace \rossubverb{show}      & Output the service definition.
+\end{tabularx}
 %
 
 \hrulefill
 
 %
-\rosverb{test} \\
+\rosverb{test} Run a ROS2 launch test.
 %
 
 \hrulefill
@@ -343,7 +351,7 @@ messages.
 Sub-commands:
 \\
 %
-\begin{tabular}{ll}
+\begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{bw}    & Display bandwidth used by topic.                  \\
 \smallhspace \rossubverb{delay} & Display delay of topic from timestamp in header.  \\
 \smallhspace \rossubverb{echo}  & Output messages of a given topic to screen.       \\
@@ -353,12 +361,12 @@ Sub-commands:
 \smallhspace \rossubverb{list}  & Output list of active topics.                     \\
 \smallhspace \rossubverb{pub}   & Publish data to a topic.                          \\
 \smallhspace \rossubverb{type}  & Output topic's type.
-\end{tabular}
+\end{tabularx}
 %
 Examples:
 \\
 \terminal{ros2 topic bw}    \\
-\terminal{ros2 topic echo}                            \\
+\terminal{ros2 topic echo}  \\
 \terminal{ros2 topic hz}
 
 \end{multicols*}
