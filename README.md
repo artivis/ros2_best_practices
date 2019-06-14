@@ -6,6 +6,7 @@ one will come across while getting started with ROS 2.
 ### Contents
 *   [Installation](installation.md)
 *   [Where to find information?](information.md)
+*   [Colcon](colcon.md)
 *   [Launch](launch.md)
 *   [SROS 2](SROS2.md)
 *   [Snap](snap.md)
