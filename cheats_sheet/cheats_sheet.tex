@@ -12,6 +12,15 @@
 }
 
 %\usepackage{lipsum}
+
+\usepackage{hyperref} % For hyperlinks
+\hypersetup{
+    colorlinks=true,
+    %linkcolor=blue,
+    %filecolor=magenta,
+    urlcolor=cyan,
+}
+
 \usepackage{multicol} % For overall column layout
 \usepackage{xcolor} % For colors
 \usepackage{tabularx}
@@ -30,6 +39,8 @@
 \newcommand{\textangles}[1]{\textless #1\textgreater}
 \newcommand{\smallhspace}{\-\hspace{0.3cm}}
 \newcommand{\terminal}[1]{\-\hspace{0.5cm}{\sffamily\$ #1}}
+\newcommand{\terminalinebreak}[1]{\ \textbackslash\hfill\phantom{.}\linebreak\-\hspace{0.5cm}~}
+\newcommand{\ddash}{-{}-}
 
 \begin{document}
 \setlength\parindent{0pt}
@@ -42,24 +53,36 @@
 
 \hrulefill
 
+\textbf{Command Line Interface}
+
 %
-All ROS 2 CLI tools start with the prefix `ros2' followed by a verb
-and (possibly) a sub-verb.
+All ROS 2 CLI tools start with the prefix `ros2' followed by a verb,
+a sub-verb and (possibly) positional/optional arguments.
+
 For any tool, the documentation is accessible with,\\
-\terminal{ros2 \rosverb{verb} - -help}\\
-and similarly for sub-verb documentation,\\
-\terminal{ros2 \rosverb{verb} \rossubverb{sub\_verb} -h}
 %
+\terminal{ros2 \rosverb{verb} \ddash help}\\
+%
+and similarly for sub-verb documentation,\\
+%
+\terminal{ros2 \rosverb{verb} \rossubverb{sub\_verb} -h}
+
+Similarly, auto-completion is available for all (sub-)verbs and
+most positional/optional arguments. E.g.,\\
+%
+\terminal{ros2 \rosverb{verb} [tab][tab]}
+
+Some of the examples below rely on:\\
+\href{https://github.com/ros2/demos}{ROS 2 demos package}.
 
 \hrulefill
 
 %
-\rosverb{action} Also allows to manually send a goal and
-displays debugging information about action.
+\rosverb{action} Allows to manually send a goal and
+displays debugging information about actions.
 \\
 Sub-commands:
 \\
-% @todo: limit description size
 \begin{tabularx}{\linewidth}{lX}
 \smallhspace \rossubverb{info}        & Output information about an action. \\
 \smallhspace \rossubverb{list}        & Output a list of action names.      \\
@@ -67,6 +90,13 @@ Sub-commands:
 \smallhspace \rossubverb{show}        &  Output the action definition.
 \end{tabularx}
 %
+Examples:
+\\
+\terminal{ros2 action info /fibonacci} \\
+\terminal{ros2 action list} \\
+\terminal{ros2 action send\_goal /fibonacci
+\terminalinebreak~action\_tutorials/action/Fibonacci "{order: 5}"} \\
+\terminal{ros2 action show action\_tutorials/action/Fibonacci}
 
 \hrulefill
 
@@ -85,8 +115,8 @@ Sub-commands:
 \\
 Examples:
 \\
-\terminal{ros2 info bag\_name}\\
-\terminal{ros2 play bag\_name}\\
+\terminal{ros2 info \textangles{bag-name}}\\
+\terminal{ros2 play \textangles{bag-name}}\\
 \terminal{ros2 record -a}
 %
 
@@ -294,6 +324,16 @@ files from a list of identities and policy files.                               
 \smallhspace \rossubverb{generate\_policy}       & List keys.
 \end{tabularx}
 %
+Examples (see \href{https://github.com/ros2/sros2}{sros2 package}):
+\\
+\terminal{ros2 security create\_key demo\_keys /talker}   \\
+\terminal{ros2 security create\_permission demo\_keys /talker
+\terminalinebreak~policies/sample\_policy.xml} \\
+\terminal{ros2 security generate\_artifacts} \\
+%\terminal{ros2 security list\_keys} \\
+\terminal{ros2 security create\_keystore demo\_keys}
+%\terminal{ros2 security distribute\_key} \\
+%\terminal{ros2 security generate\_policy}
 
 \hrulefill
 
@@ -312,10 +352,10 @@ Sub-commands:
 %
 Examples:
 \\
-\terminal{ros2 service call \textbackslash\hfill\phantom{.}\linebreak
-/add\_two\_ints example\_interfaces/AddTwoInts "{a: 1, b: 2}"}        \\
-\terminal{ros2 service find rcl\_interfaces/srv/ListParameters}       \\
-\terminal{ros2 service list}                                          \\
+\terminal{ros2 service call /add\_two\_ints
+\terminalinebreak~example\_interfaces/AddTwoInts "{a: 1, b: 2}"}  \\
+\terminal{ros2 service find rcl\_interfaces/srv/ListParameters}   \\
+\terminal{ros2 service list}                                      \\
 \terminal{ros2 service type /talker/describe\_parameters}
 %
 
@@ -365,9 +405,16 @@ Sub-commands:
 %
 Examples:
 \\
-\terminal{ros2 topic bw}    \\
-\terminal{ros2 topic echo}  \\
-\terminal{ros2 topic hz}
+\terminal{ros2 topic bw /chatter}                         \\
+%\terminal{ros2 topic delay} \\
+\terminal{ros2 topic echo /chatter}                       \\
+\terminal{ros2 topic find rcl\_interfaces/msg/Log}        \\
+\terminal{ros2 topic hz /chatter}                         \\
+\terminal{ros2 topic info /chatter}                       \\
+\terminal{ros2 topic list}                                \\
+\terminal{ros2 topic pub /chatter std\_msgs/msg/String
+\terminalinebreak~'data: Hello ROS 2 world'}              \\
+\terminal{ros2 topic type /rosout}                        \\
 
 \end{multicols*}
 \end{document}
