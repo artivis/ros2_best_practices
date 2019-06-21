@@ -63,3 +63,61 @@ def generate_launch_description():
 
     return LaunchDescription([parameter_blackboard])
 ```
+
+### A `launch-prefix` wrapper
+```python
+#!/usr/bin/env python3
+
+# Copyright 2019 Canonical, ltd.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+"""
+Launch file that wraps another launch file to be called with a 'launch-prefix'.
+
+usage:
+
+$ ros2 launch <somewhere> launch_prefix.launch.py pkg:=<pkg-name> launch:=<launch-file> args:=<launch-prefix-args>
+
+e.g.
+
+$ ros2 launch <somewhere> launch_prefix.launch.py pkg:=demo_nodes_cpp launch:=talker_listener.launch.py args:=valgrind
+"""
+
+import os
+
+from launch import LaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+import launch.actions
+import launch_ros.actions
+
+def generate_launch_description():
+    # Necessary to get real-time stdout from python processes:
+    proc_env = os.environ.copy()
+    proc_env['PYTHONUNBUFFERED'] = '1'
+
+    ld = LaunchDescription([
+      launch.actions.DeclareLaunchArgument('pkg'),
+      launch.actions.DeclareLaunchArgument('launch'),
+      launch.actions.DeclareLaunchArgument('args', default_value=''),
+    ])
+
+    ld.add_action(launch.actions.SetLaunchConfiguration('launch-prefix', launch.substitutions.LaunchConfiguration('args')))
+
+    ld.add_action(launch.actions.IncludeLaunchDescription(PythonLaunchDescriptionSource([
+                  launch_ros.substitutions.FindPackage(launch.substitutions.LaunchConfiguration('pkg')), '/share/',
+                  launch.substitutions.LaunchConfiguration('pkg'), '/launch/',
+                  launch.substitutions.LaunchConfiguration('launch')])))
+
+    return ld
+```
