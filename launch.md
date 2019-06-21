@@ -13,3 +13,21 @@ def generate_launch_description():
 
     ld.add_action(launch.actions.SetLaunchConfiguration('launch-prefix', 'valgrind'))
 ```
+
+### Launching a CLI publisher
+```python
+import sys
+
+from launch import LaunchDescription
+from launch.actions.execute_process import ExecuteProcess
+
+
+def generate_launch_description():
+    publisher = ExecuteProcess(
+        cmd=['ros2 topic pub /chatter std_msgs/String "data: Hello World"'],
+        shell=True,
+        output='screen'
+    )
+    return LaunchDescription([publisher])
+
+```
