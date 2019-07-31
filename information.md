@@ -6,3 +6,4 @@
 *   [ROS 2 - (old?) documentation](http://docs.ros2.org/dashing/)
 *   [ROS Answers](http://answers.ros.org/questions/)
 *   [ROS 2 - Repos status page](http://repo.ros2.org/status_page/ros_dashing_default.html)
+*   [A great book from roboscience.org](http://roboscience.org/book/html/index.html) ([pdf](http://roboscience.org/book/Robotics.pdf))
