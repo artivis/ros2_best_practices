@@ -12,3 +12,4 @@ one will come across while getting started with ROS 2.
 *   [Snap](snap.md)
 *   [Cheats Sheet](https://github.com/artivis/ros2_cheats_sheet)
 *   [Awesome ROS 2](https://fkromer.github.io/awesome-ros2/)
+*   [Awesome robotic tooling](https://github.com/Ly0n/awesome-robotic-tooling)
