@@ -1,5 +1,9 @@
 # Colcon
 
+Run a clean build:
+
+    $ colcon build --cmake-clean-first --cmake-clean-cache
+
 How to run the tests of a given package while actually seeing the test output:
 
     $ colcon test --packages-select <package name> --event-handlers console_direct+
